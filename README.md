@@ -1,222 +1,69 @@
-<!-- Hey bla bla bla ... -->
+# Welcome to your Lovable project
 
-# Build a simple web application using Rust and Web Assembly.
+## Project info
 
-Summary
-------
-- 1- Introduction to WebAssembly: Understand what WebAssembly is and how it works with Rust and JavaScript.
+**URL**: https://lovable.dev/projects/6fe8ebad-5bd1-425a-acb3-50ef847253f1
 
-- 2- Setting Up the Project: Create a new Rust project and configure it for WebAssembly.
+## How can I edit this code?
 
-- 3 - Writing the Rust Code: Implement the tax calculation logic in Rust.
+There are several ways of editing your application.
 
-- 4 - Building the Project: Use wasm-pack to build the project.
+**Use Lovable**
 
-- 5 - Setting Up the Web Environment: Create an HTML file to load the WebAssembly module and provide a user interface.
+Simply visit the [Lovable Project](https://lovable.dev/projects/6fe8ebad-5bd1-425a-acb3-50ef847253f1) and start prompting.
 
-- 6 - Serving the Project: Use a simple HTTP server to serve the project and test it in a web browser.
+Changes made via Lovable will be committed automatically to this repo.
 
-<!-- --------------------------------------------------- -->
-<!-- --------------------------------------------------- -->
-<!-- --------------------------------------------------- -->
+**Use your preferred IDE**
 
-# Introduction to WebAssembly
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-# What is WebAssembly?
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-WebAssembly (often abbreviated as Wasm) is a binary instruction format for a stack-based virtual machine. 
+Follow these steps:
 
-It is designed as a portable compilation target for programming languages, enabling high-performance applications to run on web pages. 
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
 
-WebAssembly is intended to execute at near-native speed by taking advantage of common hardware capabilities.
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
 
-# How WebAssembly Works with Rust and JavaScript ?
+# Step 3: Install the necessary dependencies.
+npm i
 
-What It Is: WebAssembly is a binary instruction format designed for high-performance execution and designed to be a compilation target for high-level languages like C, C++, and Rust. This means you write your code in these languages and compile it into WebAssembly, which can then run in web browsers.
-
-How It Works: WebAssembly runs in a sandboxed execution environment, providing a secure and fast way to execute code. It works alongside JavaScript, allowing web developers to leverage the performance of Wasm for compute-intensive tasks while using JavaScript for the rest of the application.
-
-WebAssembly modules can be written in languages like Rust and then executed in web environments alongside JavaScript. Rust, known for its performance and safety, is a great fit for writing WebAssembly modules. JavaScript can then be used to interact with these modules, providing a seamless integration between high-performance logic and dynamic web applications.
-
-<!-- -------------------------------------------------- -->
-
-Creating a WebAssembly Tax Calculator with Rust
-Step 1: Setting Up the Project
-Make sure you have Rust installed - Check my Rust courses, or go directly to rust website to download and install Rust, but I think you already have it installed, so let's move on
-
-# Create a Rust Project
-cargo new tax-calc-wasm
-cd tax-calc-wasm
-
-- Update Cargo.toml: Open Cargo.toml and add the following under [dependencies] and [lib] sections to configure the project for Wasm:
-```toml
-[dependencies]
-wasm-bindgen = "0.2"
-wasm-bindgen is a crate that facilitates the interaction between Rust and JavaScript when targeting WebAssembly. 
-
-[lib]
-'lib'
-This section of Cargo.toml is used to configure settings for the Rust library we are creating.
-
-crate-type: This specifies the type of output that the Rust compiler should produce. In Rust, a "crate" is a compilation unit, and crates can be either binary (executables) or libraries.
-"cdylib": This stands for "C-compatible dynamic library." When targeting WebAssembly, this type indicates that we want to produce a dynamic library that can be used in environments expecting C-compatible calling conventions. Essentially, it tells the Rust compiler to generate a shared library suitable for WebAssembly.
-
-simpler words:
-------------
-In the context of WebAssembly, specifying crate-type = ["cdylib"] ensures that the Rust compiler produces output that can be used as a WebAssembly module, which can then be loaded and executed in a web browser or other JavaScript environments.
-
-In summary:
-
-1 wasm-bindgen = "0.2": Adds the wasm-bindgen crate as a dependency, which provides the tools needed for Rust to communicate with JavaScript through WebAssembly.
-
-2 [lib] crate-type = ["cdylib"]: Configures the Rust project to produce a C-compatible dynamic library, suitable for use as a WebAssembly module.
-These configurations are crucial for building a Rust project that can be compiled to WebAssembly and used in web applications, enabling seamless integration between Rust and JavaScript.
-
-
-
+# Step 4: Start the development server with auto-reloading and an instant preview.
+npm run dev
 ```
 
-# Step 2: Writing the Rust Code
-Edit src/lib.rs to implement the tax calculation logic:
-```rust
-// Importing wasm_bindgen crate to enable communication between JavaScript and Rust
-use wasm_bindgen::prelude::*;
+**Edit a file directly in GitHub**
 
-// Define the function that will be exposed to JavaScript
-#[wasm_bindgen]
-pub fn calculate_tax(income: f64) -> f64 {
-    // Initialize the tax variable
-    let mut tax = 0.0;
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-    // Apply tax brackets to calculate the tax amount
-    if income <= 9875.0 {
-        tax = income * 0.10;
-    } else if income <= 40125.0 {
-        tax = 987.5 + (income - 9875.0) * 0.12;
-    } else if income <= 85525.0 {
-        tax = 4617.5 + (income - 40125.0) * 0.22;
-    } else if income <= 163300.0 {
-        tax = 14605.5 + (income - 85525.0) * 0.24;
-    } else if income <= 207350.0 {
-        tax = 33271.5 + (income - 163300.0) * 0.32;
-    } else if income <= 518400.0 {
-        tax = 47367.5 + (income - 207350.0) * 0.35;
-    } else {
-        tax = 156235.0 + (income - 518400.0) * 0.37;
-    }
+**Use GitHub Codespaces**
 
-    // Return the calculated tax
-    tax
-}
-```
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-# Step 3: Building the Project
-Build the project using wasm-pack:
-```bash
-wasm-pack build --target web
-```
+## What technologies are used for this project?
 
-# Step 4: Setting Up the Web Environment
-Create an index.html file in the tax-calculator-wasm directory with the following content:
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tax Calculator</title>
-    <style>
-        /* Basic styling for the body */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-        /* Styling for the main heading */
-        h1 {
-            color: #d35400; /* Rust color */
-        }
-        /* Margins for labels, inputs, and buttons */
-        label, input, button {
-            margin: 10px 0;
-        }
-        /* Styling for the input field */
-        input {
-            padding: 8px;
-            font-size: 16px;
-            border: 2px solid #d35400; /* Rust color */
-            border-radius: 4px;
-        }
-        /* Styling for the button */
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #e67e22; /* Orange color */
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        /* Hover effect for the button */
-        button:hover {
-            background-color: #d35400; /* Darker rust color */
-        }
-        /* Styling for the result text */
-        #result {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #e67e22; /* Orange color */
-        }
-    </style>
-</head>
-<body>
-    <!-- Main heading of the page -->
-    <h1>Tax Calculator</h1>
-    <!-- Label and input for the income value -->
-    <label for="income">Income: </label>
-    <input type="number" id="income" name="income" min="0">
-    <!-- Button to trigger tax calculation -->
-    <button id="calculateButton">Calculate Tax</button>
-    <!-- Paragraph to display the result -->
-    <p id="result"></p>
-    <script type="module">
-        // Importing the WebAssembly module and the calculate_tax function
-        import init, { calculate_tax } from "./pkg/tax_calculator_wasm.js";
+This project is built with .
 
-        // Function to initialize the WebAssembly module
-        async function run() {
-            await init(); // Wait for the module to be initialized
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
 
-            // Function to calculate tax when the button is clicked
-            function calculateTax() {
-                const income = parseFloat(document.getElementById("income").value); // Get the income value from the input field
-                const tax = calculate_tax(income); // Call the calculate_tax function from the WebAssembly module
-                document.getElementById("result").innerText = `Tax: $${tax.toFixed(2)}`; // Display the result
-            }
+## How can I deploy this project?
 
-            // Attach the calculateTax function to the button's click event
-            document.getElementById("calculateButton").addEventListener("click", calculateTax);
-        }
+Simply open [Lovable](https://lovable.dev/projects/6fe8ebad-5bd1-425a-acb3-50ef847253f1) and click on Share -> Publish.
 
-        // Run the initialization function
-        run();
-    </script>
-</body>
-</html>
-```
+## I want to use a custom domain - is that possible?
 
-# Step 5: Serving the Project
-
-To serve the project, you need a simple web server.
-Install a Web Server: You can install one using npm:
-## npm install -g http-server
-
-http-server .
-Navigate to http://localhost:8000 in your web browser to see the tax calculator in action.
+We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
